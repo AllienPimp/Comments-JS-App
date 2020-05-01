@@ -94,3 +94,7 @@ form {
 textarea {
     width: 100%;
 }
+
+.reload {
+    margin-top: 20px;
+}
