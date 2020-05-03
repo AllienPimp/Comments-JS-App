@@ -1,27 +1,24 @@
 var sectionElement = document.querySelector(".comments");
 var searchButton = document.querySelector(".search-button");
 var searchBar = document.querySelector(".search input");
+var dataFromDB = [];
 
+fetch('https://jsonplaceholder.typicode.com/comments?_limit=20&fbclid=IwAR3iPkzSGNMK5p6M6_I6wfsb6UChKCH-YoMiD0Nf5rSQIRlJKhLexFzrzyA', {
+        method: 'GET'
+    })
+    .then(function(resp) {
+        // console.log(resp);
+        return resp.json();
+    })
+    .then(function(data) {
+        dataFromDB = data;
+        // console.dir(data[0]);
+        return data;
 
-var dataFromDB = [{
-        id: "1",
-        title: "JS is amazing",
-        body: "JS is amazing and so easy to learn. I like it a lot!",
-        author: "CB"
-    },
-    {
-        id: "2",
-        title: "DOM manipulation is easy",
-        body: "DOM Manipulation using JS is straightforward and fun! You can intercept user actions and change things in the HTML and also in CSS.",
-        author: "Anonymous"
-    },
-    {
-        id: "3",
-        title: "CSS is nice",
-        body: "To style your HTML page is so much fun! I like playing with colos and images!",
-        author: "AB"
-    }
-];
+    })
+    .then(function(eee) {
+        executePage();
+    })
 
 function createArticle(id, title, body, author) {
 
@@ -61,11 +58,9 @@ function createArticle(id, title, body, author) {
 
 function addDataOnPage() {
     for (var i = 0; i < dataFromDB.length; i++) {
-        var newCreatedArticle = createArticle(dataFromDB[i].id, dataFromDB[i].title, dataFromDB[i].body, dataFromDB[i].author);
+        var newCreatedArticle = createArticle(dataFromDB[i].id, dataFromDB[i].name, dataFromDB[i].body, dataFromDB[i].email);
         sectionElement.appendChild(newCreatedArticle);
     }
-
-
 }
 
 function addNewComment(event) {
@@ -112,8 +107,12 @@ function displaySearch() {
     console.log(searchBar.value);
 }
 
-function clickOnLike() {
-    console.log("x you clicked on Like!");
+function clickOnLike(event) {
+    event.preventDefault();
+    var likedDiv = this.parentElement;
+    var likedArticle = likedDiv.parentElement;
+    var titleArticle = likedArticle.querySelector("header").innerHTML;
+    console.log("You liked the article: " + titleArticle);
 }
 
 function executePage() {
@@ -144,4 +143,4 @@ function executePage() {
 
 
 
-document.addEventListener("DOMContentLoaded", executePage);
+// document.addEventListener("DOMContentLoaded", executePage);
