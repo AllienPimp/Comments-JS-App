@@ -123,8 +123,8 @@ function executePage() {
     var submitButton = document.querySelector(".input-comment button[type=submit]");
     submitButton.addEventListener("click", addNewComment);
 
-    var reloadButton = document.querySelector(".reload");
-    reloadButton.addEventListener("click", addDataOnPage);
+    // var reloadButton = document.querySelector(".reload");
+    // reloadButton.addEventListener("click", addDataOnPage);
 
     var deleteCommentButton = document.querySelectorAll(".comments button");
     for (var i = 0; i < deleteCommentButton.length; i++) {
